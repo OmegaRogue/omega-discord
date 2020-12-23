@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "OmegaRogue <omegarogue@omegavoid.codes> (https://omegavoid.codes)"
+  "author": "OmegaRogue <omegarogue@omegavoid.codes> (https://omegavoid.codes)",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
 }
