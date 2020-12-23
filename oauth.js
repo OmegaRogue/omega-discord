@@ -15,4 +15,4 @@ http.createServer((req, res) => {
 
   res.write(content);
   res.end();
-}).listen(config.port);
+}).listen(process.env.OAUTH2_WEBSERVER_PORT);
