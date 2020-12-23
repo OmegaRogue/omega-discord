@@ -1,7 +1,7 @@
-const { Client, MessageEmbed, APIMessage } = require('discord.js');
+const {Client, MessageEmbed, APIMessage} = require('discord.js');
 const client = new Client();
 
-const { DiscordInteractions } = require("slash-commands");
+const {DiscordInteractions} = require("slash-commands");
 
 const interaction = new DiscordInteractions({
   applicationId: process.env.DISCORD_ID,
@@ -10,11 +10,10 @@ const interaction = new DiscordInteractions({
 });
 
 
-
 const echo = {
   name: "echo",
   description: "Echos your text as an embed",
-  options:[
+  options: [
     {
       name: "content",
       description: "Context of the embed",
@@ -50,7 +49,7 @@ client.on('ready', () => {
     const command = interaction.data.name.toLowerCase();
     const args = interaction.data.options;
 
-    if(command == 'hello') {
+    if (command == 'hello') {
       client.api.interactions(interaction.id, interaction.token).callback.post({
         data: {
           type: 4,
@@ -60,7 +59,7 @@ client.on('ready', () => {
         }
       }).then(console.log).catch(console.error);
     }
-    if(command == 'echo') {
+    if (command == 'echo') {
       const description = args.find(arg => arg.name.toLowerCase() === "content").value;
       const embed = new MessageEmbed()
           .setTitle("Echo!")
@@ -77,10 +76,6 @@ client.on('ready', () => {
     }
   });
 })
-
-
-
-
 
 
 async function createAPIMessage(interaction, content) {
