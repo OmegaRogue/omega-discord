@@ -29,83 +29,17 @@ const pronouns = {
         {
           name: "main",
           description: "Changes your main Pronouns",
-          type: ApplicationCommandOptionType.SUB_COMMAND,
-          options: [
-            {
-              name: "pronouns",
-              description: "The set of pronouns to do something with",
-              type: ApplicationCommandOptionType.STRING,
-              required: true,
-              choices: [
-                {
-                  name: "she",
-                  description: "she/her/her/hers/herself"
-                },
-                {
-                  name: "he",
-                  description: "he/him/his/his/himself"
-                },
-                {
-                  name: "thy",
-                  description: "they/them/their/theirs/theirself"
-                },
-              ]
-            }
-          ]
+          type: ApplicationCommandOptionType.SUB_COMMAND
         },
         {
           name: "add",
           description: "Adds additional Pronouns",
-          type: ApplicationCommandOptionType.SUB_COMMAND,
-          options: [
-            {
-              name: "pronouns",
-              description: "The set of pronouns to do something with",
-              type: ApplicationCommandOptionType.STRING,
-              required: true,
-              choices: [
-                {
-                  name: "she",
-                  description: "she/her/her/hers/herself"
-                },
-                {
-                  name: "he",
-                  description: "he/him/his/his/himself"
-                },
-                {
-                  name: "thy",
-                  description: "they/them/their/theirs/theirself"
-                },
-              ]
-            }
-          ]
+          type: ApplicationCommandOptionType.SUB_COMMAND
         },
         {
           name: "remove",
           description: "Removes additional Pronouns",
-          type: ApplicationCommandOptionType.SUB_COMMAND,
-          options: [
-            {
-              name: "pronouns",
-              description: "The set of pronouns to do something with",
-              type: ApplicationCommandOptionType.STRING,
-              required: true,
-              choices: [
-                {
-                  name: "she",
-                  description: "she/her/her/hers/herself"
-                },
-                {
-                  name: "he",
-                  description: "he/him/his/his/himself"
-                },
-                {
-                  name: "thy",
-                  description: "they/them/their/theirs/theirself"
-                },
-              ]
-            }
-          ]
+          type: ApplicationCommandOptionType.SUB_COMMAND
         }
       ]
     }
@@ -237,4 +171,4 @@ async function createAPIMessage(interaction, content) {
   return {...apiMessage.data, files: apiMessage.files};
 }
 
-client.login(process.env.DISCORD_TOKEN).then(console.log).catch(console.error);
+client.login(process.env.DISCORD_TOKEN);
