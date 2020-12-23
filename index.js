@@ -1,41 +1,50 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, MessageEmbed, APIMessage } = require('discord.js');
+const client = new Client();
+
+const { DiscordInteractions } = require("slash-commands");
+
+const interaction = new DiscordInteractions({
+  applicationId: process.env.DISCORD_ID,
+  authToken: process.env.DISCORD_TOKEN,
+  publicKey: process.env.DISCORD_PUBKEY,
+});
 
 
-const utils = new require('slashUtils').utils(client);
+
+const echo = {
+  name: "echo",
+  description: "Echos your text as an embed",
+  options:[
+    {
+      name: "content",
+      description: "Context of the embed",
+      type: 3,
+      required: true
+    }
+  ]
+};
+
+const hello = {
+  name: "hello",
+  description: "Replies with Hello World!"
+};
+
+// interaction.getApplicationCommands("135079294262050816")
+//     .then(console.log)
+//     .catch(console.error);
 
 
-const config = require('./config.json')
+interaction.createApplicationCommand(echo, "135079294262050816")
+    // .then(console.log)
+    .catch(console.error);
+
+interaction.createApplicationCommand(hello, "135079294262050816")
+    // .then(console.log)
+    .catch(console.error);
 
 
 client.on('ready', () => {
   console.log('ready');
-
-  utils.guild.create(config.guild_id, {
-    data: {
-      name: "hello",
-      description: "Replies with Hello World!"
-    }
-  }).then(()=>{
-    console.log("registered hello")
-  });
-
-  utils.guild.create(config.guild_id, {
-    data: {
-      name: "echo",
-      description: "Echos your text as an embed",
-      options:[
-        {
-          name: "content",
-          description: "Context of the embed",
-          type: 3,
-          required: true
-        }
-      ]
-    }
-  }).then(()=>{
-    console.log("registered echo")
-  });
 
   client.ws.on('INTERACTION_CREATE', async interaction => {
     const command = interaction.data.name.toLowerCase();
@@ -49,13 +58,13 @@ client.on('ready', () => {
             content: "Hello World!"
           }
         }
-      })
+      }).then(console.log).catch(console.error);
     }
     if(command == 'echo') {
       const description = args.find(arg => arg.name.toLowerCase() === "content").value;
-      const embed = new Discord.MessageEmbed()
+      const embed = new MessageEmbed()
           .setTitle("Echo!")
-          .setDescription(description)
+          .setDescription("test")
           .setAuthor(interaction.member.user.username);
 
       client.api.interactions(interaction.id, interaction.token).callback.post({
@@ -63,8 +72,7 @@ client.on('ready', () => {
           type: 4,
           data: await createAPIMessage(interaction, embed)
         }
-
-      });
+      }).then(console.log).catch(console.error);
 
     }
   });
@@ -74,9 +82,9 @@ client.on('ready', () => {
 
 
 
+
 async function createAPIMessage(interaction, content) {
-  const apiMessage = await Discord.APIMessage.create(client.channels.resolve(interaction.channel_id), content)
-      .resolveData().resolveFiles();
+  const apiMessage = await APIMessage.create(client.channels.resolve(interaction.channel_id), content).resolveData().resolveFiles().makeContent();
   return apiMessage;
 }
 
