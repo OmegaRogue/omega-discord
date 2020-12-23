@@ -84,7 +84,7 @@ client.on('ready', () => {
 
 
 async function createAPIMessage(interaction, content) {
-  const apiMessage = await APIMessage.create(client.channels.resolve(interaction.channel_id), content).resolveData().resolveFiles().makeContent();
+  const apiMessage = await APIMessage.create(client.channels.resolve(interaction.channel_id), content).resolveData().resolveFiles();
   return apiMessage;
 }
 
