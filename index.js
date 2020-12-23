@@ -17,6 +17,102 @@ const hello = {
 };
 
 
+const pronouns = {
+  name: "pronoun",
+  description: "Sets your Pronoun Roles",
+  options: [
+    {
+      name: "modify",
+      description: "Modifies your Pronouns",
+      type: ApplicationCommandOptionType.SUB_COMMAND_GROUP,
+      options: [
+        {
+          name: "main",
+          description: "Changes your main Pronouns",
+          type: ApplicationCommandOptionType.SUB_COMMAND,
+          options: [
+            {
+              name: "pronouns",
+              description: "The set of pronouns to do something with",
+              type: ApplicationCommandOptionType.STRING,
+              required: true,
+              choices: [
+                {
+                  name: "she",
+                  description: "she/her/her/hers/herself"
+                },
+                {
+                  name: "he",
+                  description: "he/him/his/his/himself"
+                },
+                {
+                  name: "thy",
+                  description: "they/them/their/theirs/theirself"
+                },
+              ]
+            }
+          ]
+        },
+        {
+          name: "add",
+          description: "Adds additional Pronouns",
+          type: ApplicationCommandOptionType.SUB_COMMAND,
+          options: [
+            {
+              name: "pronouns",
+              description: "The set of pronouns to do something with",
+              type: ApplicationCommandOptionType.STRING,
+              required: true,
+              choices: [
+                {
+                  name: "she",
+                  description: "she/her/her/hers/herself"
+                },
+                {
+                  name: "he",
+                  description: "he/him/his/his/himself"
+                },
+                {
+                  name: "thy",
+                  description: "they/them/their/theirs/theirself"
+                },
+              ]
+            }
+          ]
+        },
+        {
+          name: "remove",
+          description: "Removes additional Pronouns",
+          type: ApplicationCommandOptionType.SUB_COMMAND,
+          options: [
+            {
+              name: "pronouns",
+              description: "The set of pronouns to do something with",
+              type: ApplicationCommandOptionType.STRING,
+              required: true,
+              choices: [
+                {
+                  name: "she",
+                  description: "she/her/her/hers/herself"
+                },
+                {
+                  name: "he",
+                  description: "he/him/his/his/himself"
+                },
+                {
+                  name: "thy",
+                  description: "they/them/their/theirs/theirself"
+                },
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
 const embedBuilder = {
   name: "embed",
   description: "create your own embed!",
@@ -54,29 +150,25 @@ const embedBuilder = {
   ]
 };
 
+console.log("guild");
 interaction.getApplicationCommands("135079294262050816")
     .then(console.log)
     .catch(console.error);
+console.log("global");
 interaction.getApplicationCommands()
     .then(console.log)
     .catch(console.error);
 
 
-interaction.deleteApplicationCommand("791408943736946728", "135079294262050816")
-    .then(console.log)
-    .catch(console.error);
-interaction.deleteApplicationCommand("791408943736946728")
+// interaction.deleteApplicationCommand("791427458528182293", "135079294262050816")
+//     .then(console.log)
+//     .catch(console.error);
+interaction.createApplicationCommand(pronouns, "135079294262050816")
     .then(console.log)
     .catch(console.error);
 
-interaction.createApplicationCommand(hello, "135079294262050816")
-    .then(console.log)
-    .catch(console.error);
+
 interaction.createApplicationCommand(hello)
-    .then(console.log)
-    .catch(console.error);
-
-interaction.createApplicationCommand(embedBuilder, "135079294262050816")
     .then(console.log)
     .catch(console.error);
 interaction.createApplicationCommand(embedBuilder)
